@@ -10,6 +10,8 @@ services:
       - ELASTICSEARCH_URL=http://elasticsearch:9200 #设置访问elasticsearch的地址
     ports:
       - 5601:5601
+    depends_on:
+      - elasticsearch
   elasticsearch:
     image: 192.168.3.201:80/library/elasticsearch:latest  #镜像
     container_name: elasticsearch  #定义容器名称
