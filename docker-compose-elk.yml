@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   elasticsearch:
-    image:  192.168.3.201:80/library/elasticsearch:latest  #镜像
+    image: 192.168.3.201:80/library/elasticsearch:7.13.0  #镜像
     restart: always
     container_name: elasticsearch
     ports:
@@ -15,7 +15,7 @@ services:
       - /mnt/elasticsearch/download:/usr/share/elasticsearch/download
 
   kibana:
-    image: 192.168.3.201:80/library/kibana:latest
+    image: 192.168.3.201:80/library/kibana:7.13.0
     restart: always
     container_name: kibana
     ports:
