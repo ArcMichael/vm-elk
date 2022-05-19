@@ -1,26 +1,27 @@
 version: "3.9"
 services:
-  elasticsearch:
-    image: 192.168.3.201:80/library/elasticsearch:7.13.0  #镜像
+  kibana:
+    image: 192.168.3.201:80/library/kibana:latest
+    container_name: kibana
     restart: always
-    container_name: elasticsearch
+    environment:
+      - ELASTICSEARCH_URL=http://kibana-es.in.gen10.mly0110.org.cn:9200 #设置访问elasticsearch的地址
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+      
+  elasticsearch:
+    image: 192.168.3.201:80/library/elasticsearch:latest  #镜像
+    container_name: elasticsearch  #定义容器名称
+    restart: always  #开机启动，失败也会一直重启
+    environment:
+      - "cluster.name=elasticsearch" #设置集群名称为elasticsearch
+      - "discovery.type=single-node" #以单一节点模式启动
+      - "ES_JAVA_OPTS=-Xms512m -Xmx1024m" #设置使用jvm内存大小
+    volumes:
+      # - /mnt/elasticsearch/plugins:/usr/share/elasticsearch/plugins #插件文件挂载
+      - /mnt/elasticsearch/data:/usr/share/elasticsearch/data #数据文件挂载
     ports:
       - 9200:9200
       - 9300:9300
-    environment:
-      - discovery.type=single-node
-      - ES_JAVA_OPTS=-Xms64m -Xmx128m
-    volumes:
-      - /mnt/elasticsearch/data:/usr/share/elasticsearch/data
-      - /mnt/elasticsearch/download:/usr/share/elasticsearch/download
-
-  kibana:
-    image: 192.168.3.201:80/library/kibana:7.13.0
-    restart: always
-    container_name: kibana
-    ports:
-      - 5601:5601
-    environment:
-      - elasticsearch_url=elasricsearch:9200
-    depends_on:
-      - elasticsearch
