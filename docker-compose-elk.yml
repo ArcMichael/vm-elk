@@ -25,3 +25,10 @@ services:
     ports:
       - 9200:9200
       - 9300:9300
+
+    node-exporter:
+      image: 192.168.3.201:80/library/quay.io/prometheus/node-exporter
+      container_name: node-exporter
+      restart: always
+      ports:
+      - "9100:9100"
