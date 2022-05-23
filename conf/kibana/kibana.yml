@@ -1,7 +1,5 @@
+elasticsearch.hosts: http://kibana-es.in.gen10.mly0110.org.cn:9200
 server.host: "0.0.0.0"
-elasticsearch.url: ["http://192.168.3.202:9200"]
 server.name: kibana
-# xpack.monitoring.ui.container.elasticsearch.enabled: true
-# i18n.locale: zh-CN # 中文
-elasticsearch.username: admin
-elasticsearch.password: admin123
+xpack.monitoring.ui.container.elasticsearch.enabled: true
+i18n.locale: zh-CN # 中文
