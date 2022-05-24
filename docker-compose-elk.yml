@@ -36,3 +36,13 @@ services:
       - elasticsearch
     extra_hosts:
       - "kibana-es.in.gen10.mly0110.org.cn:192.168.3.202"
+
+  elasticsearch_exporter:
+    image: quay.io/prometheuscommunity/elasticsearch-exporter:latest
+    depends_on:
+      - elasticsearch
+    command:
+     - '--es.uri=http://kibana-es.in.gen10.mly0110.org.cn:9200'
+    restart: always
+    ports:
+    - 9114:9114
