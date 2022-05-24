@@ -37,8 +37,9 @@ services:
     extra_hosts:
       - "kibana-es.in.gen10.mly0110.org.cn:192.168.3.202"
 
-  elasticsearch_exporter:
-    image: quay.io/prometheuscommunity/elasticsearch-exporter:latest
+  elasticsearch-exporter:
+    image: 192.168.3.201:80/library/quay.io/prometheuscommunity/elasticsearch-exporter:latest
+    container_name: elasticsearch-exporter
     depends_on:
       - elasticsearch
     command:
