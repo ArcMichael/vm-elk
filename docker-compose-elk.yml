@@ -47,3 +47,15 @@ services:
     restart: always
     ports:
     - 9114:9114
+
+  logstash:
+    image: 192.168.3.201:80/library/logstash:7.13.0
+    container_name: logstash
+    restart: always
+    privileged: true
+    volumes:
+      - ./conf/logstash/logstash-springboot.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
+    ports:
+      - 5000:5000
+    depends_on:
+      - elasticsearch
