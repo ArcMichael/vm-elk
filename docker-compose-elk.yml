@@ -53,6 +53,8 @@ services:
     container_name: logstash
     restart: always
     privileged: true
+    environment:
+      - LS_JAVA_OPTS=-Xms512m -Xmx1024m
     volumes:
       - ./conf/logstash/logstash-springboot.conf:/usr/share/logstash/pipeline/logstash.conf #挂载logstash的配置文件
     ports:
